@@ -8,7 +8,7 @@ import lombok.Data;
 public class EventRequestDTO {
 	private String title;
 	
-	private String detail;
+	private String details;
 	
-	private Integer maximumAteendees;
+	private Integer maximumAttendees;
 }

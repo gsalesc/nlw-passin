@@ -38,21 +38,20 @@ public class EventService {
 	public EventIdDTO createEvent(EventRequestDTO request) {
 		Event newEvent = new Event();
 		newEvent.setTitle(request.getTitle());
-		newEvent.setDetail(request.getDetail());
+		newEvent.setDetails(request.getDetails());
 		newEvent.setSlug(this.generateSlug(request.getTitle()));
-		newEvent.setMaximumAteendees(request.getMaximumAteendees());
+		newEvent.setMaximumAteendees(request.getMaximumAttendees());
 		
 		eventRepository.save(newEvent);
 		
 		return new EventIdDTO(newEvent);
 	}
 	
-	
-	
 	private String generateSlug(String text) {
 		String normalized = Normalizer.normalize(text, Normalizer.Form.NFD);
 		
-		return normalized.replaceAll("[\\InCOMBINING_DIACRITICAL_MARKS]", "")
+		return normalized
+					//.replaceAll("[\\InCOMBINING_DIACRITICAL_MARKS]", "")
 					.replaceAll("[^\\w\\s]", "")
 					.replaceAll("\\s+", "-")
 					.toLowerCase();

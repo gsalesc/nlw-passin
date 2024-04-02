@@ -45,7 +45,7 @@ public class EventController {
 		return ResponseEntity.created(uri).body(id);
 	}
 	
-	@GetMapping("/attendee/{id}")
+	@GetMapping("/attendees/{id}")
 	public ResponseEntity<AttendeesListResponseDTO> getEventAttendees(@PathVariable String id){
 		AttendeesListResponseDTO attendeesList = attendeeService.getEventsAttendee(id);
 		return ResponseEntity.ok(attendeesList);
