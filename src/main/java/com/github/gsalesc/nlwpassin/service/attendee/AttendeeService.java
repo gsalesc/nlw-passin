@@ -22,7 +22,7 @@ public class AttendeeService {
 	private CheckinRepository checkinRepository;
 	
 	public List<Attendee> getAllAttendeesByEvent(String id){
-		return attendeeRepository.findByGroupId(id);
+		return attendeeRepository.findByEventId(id);
 	}
 	
 	public AttendeesListResponseDTO getEventsAttendee(String eventId) {

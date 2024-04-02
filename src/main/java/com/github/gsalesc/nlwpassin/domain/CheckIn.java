@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +30,7 @@ public class CheckIn {
 	@Column(name="created_at", nullable =  false)
 	private LocalDateTime createdAt;
 	
+	@OneToOne
 	@JoinColumn(name="attendee_id", nullable=false)
 	private Attendee attendee;
 }

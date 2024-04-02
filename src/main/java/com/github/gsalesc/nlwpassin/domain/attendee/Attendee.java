@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,8 +34,10 @@ public class Attendee {
 	@Column(nullable =  false)
 	private String email;
 	
+	@ManyToOne
 	@JoinColumn(name = "event_id")
 	private Event event;
+	
 	
 	@Column(name="created_at", nullable =  false)
 	private LocalDateTime createdAt;
