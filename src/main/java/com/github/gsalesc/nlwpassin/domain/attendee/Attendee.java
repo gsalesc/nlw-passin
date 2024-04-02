@@ -1,6 +1,8 @@
-package com.github.gsalesc.nlwpassin.domain;
+package com.github.gsalesc.nlwpassin.domain.attendee;
 
 import java.time.LocalDateTime;
+
+import com.github.gsalesc.nlwpassin.domain.event.Event;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name="attendees")
 @Table(name="attendees")
 @Data
 @NoArgsConstructor

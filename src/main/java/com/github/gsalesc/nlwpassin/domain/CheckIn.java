@@ -2,6 +2,8 @@ package com.github.gsalesc.nlwpassin.domain;
 
 import java.time.LocalDateTime;
 
+import com.github.gsalesc.nlwpassin.domain.attendee.Attendee;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
