@@ -7,7 +7,7 @@ Microsserviço de gerenciamento de eventos presenciais. Esse projeto faz parte d
   2. Spring Data JPA
   3. Lombok
   4. Flyway
-  5. HSQL
+  5. HSQLDB
 
 ### API
 
