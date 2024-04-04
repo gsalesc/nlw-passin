@@ -9,7 +9,7 @@ Microsserviço de gerenciamento de eventos presenciais. Esse projeto faz parte d
   4. Flyway
   5. HSQL
 
-# API
+### API
 
   - POST /events/ - Cadastra um evento
   ```
