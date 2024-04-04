@@ -14,6 +14,7 @@ import com.github.gsalesc.nlwpassin.domain.event.Event;
 import com.github.gsalesc.nlwpassin.domain.event.dto.EventIdDTO;
 import com.github.gsalesc.nlwpassin.domain.event.dto.EventRequestDTO;
 import com.github.gsalesc.nlwpassin.domain.event.dto.EventResponseDTO;
+import com.github.gsalesc.nlwpassin.domain.event.exception.EventFullException;
 import com.github.gsalesc.nlwpassin.domain.event.exception.EventNotFoundException;
 import com.github.gsalesc.nlwpassin.repository.event.EventRepository;
 import com.github.gsalesc.nlwpassin.service.attendee.AttendeeService;
@@ -59,7 +60,7 @@ public class EventService {
 		List<Attendee> attendees = attendeeService.getAllAttendeesByEvent(eventId);
 		
 		if(event.getMaximumAteendees() == attendees.size())
-			throw new RuntimeException("Event is full");
+			throw new EventFullException("Event is full");
 		
 		Attendee newAttendee = new Attendee();
 		newAttendee.setName(attendee.getEmail());

@@ -13,6 +13,8 @@ import com.github.gsalesc.nlwpassin.domain.attendee.dto.AttendeeBadgeResponseDTO
 import com.github.gsalesc.nlwpassin.domain.attendee.dto.AttendeeBagdeDTO;
 import com.github.gsalesc.nlwpassin.domain.attendee.dto.AttendeeDetails;
 import com.github.gsalesc.nlwpassin.domain.attendee.dto.AttendeesListResponseDTO;
+import com.github.gsalesc.nlwpassin.domain.attendee.exception.AttendeeAlreadySubscribedException;
+import com.github.gsalesc.nlwpassin.domain.attendee.exception.AttendeeNotFoundException;
 import com.github.gsalesc.nlwpassin.repository.attendee.AttendeeRepository;
 import com.github.gsalesc.nlwpassin.repository.checkin.CheckinRepository;
 import com.github.gsalesc.nlwpassin.service.checkin.CheckInService;
@@ -52,7 +54,7 @@ public class AttendeeService {
 	
 	public void verifyAttendeeSubscription(String eventId, String email) {
 		Optional<Attendee> isAttendeeSubscribed = attendeeRepository.findByEventIdAndEmail(eventId, email);
-		if(isAttendeeSubscribed.isPresent()) throw new RuntimeException("Attendee already subscribed");
+		if(isAttendeeSubscribed.isPresent()) throw new AttendeeAlreadySubscribedException("Attendee already subscribed");
 	}
 	
 	
@@ -67,7 +69,7 @@ public class AttendeeService {
 	
 	private Attendee getAttendeeById(String attendeeId) {
 		return this.attendeeRepository.findById(attendeeId)
-				.orElseThrow(() -> new RuntimeException("Attendee not found"));
+				.orElseThrow(() -> new AttendeeNotFoundException("Attendee not found"));
 	}
 	
 	
