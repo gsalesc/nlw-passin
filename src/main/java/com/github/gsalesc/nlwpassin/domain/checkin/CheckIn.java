@@ -1,4 +1,4 @@
-package com.github.gsalesc.nlwpassin.domain;
+package com.github.gsalesc.nlwpassin.domain.checkin;
 
 import java.time.LocalDateTime;
 

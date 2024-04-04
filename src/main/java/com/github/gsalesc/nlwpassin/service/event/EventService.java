@@ -1,12 +1,15 @@
 package com.github.gsalesc.nlwpassin.service.event;
 
 import java.text.Normalizer;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.gsalesc.nlwpassin.domain.attendee.Attendee;
+import com.github.gsalesc.nlwpassin.domain.attendee.dto.AttendeeIdDTO;
+import com.github.gsalesc.nlwpassin.domain.attendee.dto.AttendeeRequestDTO;
 import com.github.gsalesc.nlwpassin.domain.event.Event;
 import com.github.gsalesc.nlwpassin.domain.event.dto.EventIdDTO;
 import com.github.gsalesc.nlwpassin.domain.event.dto.EventRequestDTO;
@@ -45,6 +48,28 @@ public class EventService {
 		eventRepository.save(newEvent);
 		
 		return new EventIdDTO(newEvent);
+	}
+	
+	public AttendeeIdDTO registerAttendeeOnEvent(String eventId, AttendeeRequestDTO attendee) {
+		this.attendeeService.verifyAttendeeSubscription(eventId, attendee.getEmail());
+		
+		Event event = eventRepository.findById(eventId)
+				.orElseThrow(() -> new EventNotFoundException("Event not found with id:" + eventId));
+		
+		List<Attendee> attendees = attendeeService.getAllAttendeesByEvent(eventId);
+		
+		if(event.getMaximumAteendees() == attendees.size())
+			throw new RuntimeException("Event is full");
+		
+		Attendee newAttendee = new Attendee();
+		newAttendee.setName(attendee.getEmail());
+		newAttendee.setEmail(attendee.getEmail());
+		newAttendee.setEvent(event);
+		newAttendee.setCreatedAt(LocalDateTime.now());
+		
+		this.attendeeService.registerAttendee(newAttendee);
+		
+		return new AttendeeIdDTO(newAttendee.getId());
 	}
 	
 	private String generateSlug(String text) {

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.github.gsalesc.nlwpassin.domain.attendee.dto.AttendeeIdDTO;
+import com.github.gsalesc.nlwpassin.domain.attendee.dto.AttendeeRequestDTO;
 import com.github.gsalesc.nlwpassin.domain.attendee.dto.AttendeesListResponseDTO;
 import com.github.gsalesc.nlwpassin.domain.event.dto.EventIdDTO;
 import com.github.gsalesc.nlwpassin.domain.event.dto.EventRequestDTO;
@@ -50,4 +52,13 @@ public class EventController {
 		AttendeesListResponseDTO attendeesList = attendeeService.getEventsAttendee(id);
 		return ResponseEntity.ok(attendeesList);
 	}
+	
+	@PostMapping("/{eventId}/attendees")
+	public ResponseEntity<AttendeeIdDTO> registerAttendeeOnEvent(@PathVariable String eventId, 
+							@RequestBody AttendeeRequestDTO attendee, UriComponentsBuilder uriComponentsBuilder) {
+		
+		AttendeeIdDTO id = this.eventService.registerAttendeeOnEvent(eventId, attendee);
+		URI uri = uriComponentsBuilder.path("attendees/{attendee-id}/badge").buildAndExpand(id).toUri();
+		return ResponseEntity.created(uri).body(id);
+	}	
 }
