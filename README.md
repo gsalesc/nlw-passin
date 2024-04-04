@@ -45,7 +45,7 @@ Microsserviço de gerenciamento de eventos presenciais. Esse projeto faz parte d
   ```
 
   ```
-  200 OK:
+  201 CREATED:
 
   {
       "id": String
@@ -84,7 +84,7 @@ Microsserviço de gerenciamento de eventos presenciais. Esse projeto faz parte d
   ```
 
   ```
-  200 OK:
+  201 CREATED:
   {
       "id": String
   }
@@ -108,6 +108,6 @@ Microsserviço de gerenciamento de eventos presenciais. Esse projeto faz parte d
   - POST /attendees/{attendeeId}/check-in - Realiza o checkin do participante
 
   ```
-  200 OK:
+  200 OK
   ```
   
